@@ -1,5 +1,6 @@
 require('./lib/mongoose.js');
 const express = require('express');
+const cors = require('cors');
 const debug = require('debug')('app:server');
 const app = express();
 const { config } = require('./config');
@@ -17,6 +18,7 @@ const { port } = config;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 favoritesApi(app);
 usersApi(app);
@@ -28,4 +30,4 @@ app.use(logErrors);
 app.use(wrapErrors);
 app.use(errorHandler);
 
-app.listen(port, () => debug(`Server on port ${port}`));
+app.listen(port || 3001, () => debug(`Server on port ${port || 3001}`));

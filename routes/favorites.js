@@ -8,7 +8,7 @@ function favoritesApi(app) {
   const router = express.Router();
   const favoriteService = new FavoritesServices();
 
-  app.use('/api/favorites', router);
+  app.use('/api/favorites/', router);
 
   router.get('/', authErrorHandler, async (req, res, next) => {
     try {
