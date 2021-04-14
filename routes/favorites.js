@@ -35,6 +35,7 @@ function favoritesApi(app) {
   });
   router.post('/', authErrorHandler, async (req, res, next) => {
     const favorite = req.body;
+
     try {
       const favoriteCreated = await favoriteService.createFavorite(favorite);
       res.status(201).json({

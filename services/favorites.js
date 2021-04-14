@@ -23,14 +23,12 @@ class FavoritesServices {
   async createFavorite(favorite) {
     const user = await this.userService.getUser(favorite.user);
 
-    const newNote = new Favorite({
+    const newFavorite = new Favorite({
       ...favorite,
-      date: new Date(),
       user: user._id
     });
-    console.log(newNote);
 
-    const noteCreated = await newNote.save();
+    const noteCreated = await newFavorite.save();
 
     user.favorites = user.favorites.concat(noteCreated._id);
     await user.save();

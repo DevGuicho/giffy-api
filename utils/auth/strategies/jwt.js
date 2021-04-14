@@ -18,9 +18,11 @@ passport.use(
         if (!user) {
           return cb(boom.unauthorized(), false);
         }
-        delete user.password;
+        const newUser = user.toJSON();
 
-        cb(null, { ...user, scopes: tokenPayload.scopes });
+        delete newUser.password;
+
+        cb(null, { ...newUser });
       } catch (error) {
         cb(error);
       }

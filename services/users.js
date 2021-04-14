@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 
 class UsersService {
   async getUsers() {
-    const users = await User.find({}).populate('notes', {
+    const users = await User.find({}).populate('favorites', {
       content: 1,
       important: 1,
       date: 1
@@ -18,7 +18,8 @@ class UsersService {
   }
 
   async getUserByEmail(email) {
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).populate('favorites');
+
     return user;
   }
 

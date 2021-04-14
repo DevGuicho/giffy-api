@@ -1,0 +1,23 @@
+{
+  "name": "giffy-api",
+  "version": 2,
+  "builds": [
+    {
+      "src": "index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.js"
+    }
+  ],
+  "env": {
+    "DB_USER": "db_user_platzivideos",
+    "DB_PASSWORD": "aCHhmyrqBU2omIac",
+    "DB_HOST": "cluster0.ih2pv.mongodb.net",
+    "DB_NAME": "gifs_db",
+    "AUTH_JWT_SECRET": "9kOX7g6PNEJalbQAwpGWhHe4UYyFnZCt"
+  }
+}

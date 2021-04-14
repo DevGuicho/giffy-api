@@ -6,7 +6,6 @@ const app = express();
 const { config } = require('./config');
 const authApi = require('./routes/auth.js');
 const favoritesApi = require('./routes/favorites');
-const usersApi = require('./routes/users.js');
 const {
   logErrors,
   wrapErrors,
@@ -16,12 +15,10 @@ const notFoundHandler = require('./utils/middlewares/notFoundHandler.js');
 
 const { port } = config;
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+app.use(express.json());
 
 favoritesApi(app);
-usersApi(app);
 authApi(app);
 
 app.use(notFoundHandler);

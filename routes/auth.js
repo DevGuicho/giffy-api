@@ -5,6 +5,7 @@ const boom = require('@hapi/boom');
 const jwt = require('jsonwebtoken');
 const { config } = require('../config');
 const UsersService = require('../services/users');
+const authErrorHandler = require('../utils/middlewares/authErrorHandler');
 
 /* const TWO_HOURS_IN_SEC = 7200; */
 // BASIC STRATEGY
@@ -16,11 +17,10 @@ function authApi(app) {
 
   const usersService = new UsersService();
 
+  router.get('/', authErrorHandler, async (req, res) => {
+    res.json({ user: req.user });
+  });
   router.post('/sign-in', async function (req, res, next) {
-    const { apiKeyToken } = req.body;
-    if (!apiKeyToken) {
-      next(boom.unauthorized('apiKeyToken is required'));
-    }
     passport.authenticate('basic', function (error, user) {
       try {
         if (error || !user) {
