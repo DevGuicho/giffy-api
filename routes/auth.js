@@ -63,10 +63,20 @@ function authApi(app) {
   });
   router.post('/sign-up', async function (req, res, next) {
     const user = req.body;
+    const { name, email } = user;
     try {
       const createdUser = await usersService.createUser(user);
+      const { _id: id } = createdUser;
+      const payload = {
+        sub: id,
+        name,
+        email
+      };
+      const token = jwt.sign(payload, config.authJwtSecret, {
+        expiresIn: '120m'
+      });
       res.status(201).json({
-        data: createdUser._id,
+        data: { id: createdUser._id, token },
         message: 'User Created'
       });
     } catch (error) {
