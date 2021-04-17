@@ -10,9 +10,10 @@ function favoritesApi(app) {
 
   app.use('/api/favorites/', router);
 
-  router.get('/', authErrorHandler, async (req, res, next) => {
+  router.get('/:userId', authErrorHandler, async (req, res, next) => {
+    const { userId } = req.params;
     try {
-      const favorites = await favoriteService.getFavorites();
+      const favorites = await favoriteService.getFavorites({ userId });
       res.json({
         message: 'Favorites listed',
         data: favorites

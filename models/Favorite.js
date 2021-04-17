@@ -1,6 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const favoriteSchema = new Schema({
+  gifId: String,
   url: String,
   user: {
     type: Schema.Types.ObjectId,

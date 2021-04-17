@@ -7,11 +7,8 @@ class FavoritesServices {
     this.userService = new UsersService();
   }
 
-  async getFavorites() {
-    const favorites = await Favorite.find({}).populate('user', {
-      email: 1,
-      name: 1
-    });
+  async getFavorites({ userId }) {
+    const favorites = await Favorite.find({ user: userId });
     return favorites;
   }
 
